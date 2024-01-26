@@ -40,9 +40,12 @@ for ext in $(echo $extensions | tr ',' ' '); do
       if [ ! -f "$output_dir/$filename.epub" ]; then
         echo ">> Converting $file to $output_dir/$filename.epub"
         $EBOOK_CONVERT_PATH "$file" "$output_dir/$filename.epub"
+        chmod --reference="$file" "$output_dir/$filename.epub"  # Preserve the same permissions
+        chown --reference="$file" "$output_dir/$filename.epub"  # Preserve the same owner
       else
         echo ">>   Already converted"
       fi
     fi
   done
 done
+
