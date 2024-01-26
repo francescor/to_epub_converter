@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # https://github.com/francescor/to_epub_converter
+set -e
 
 if [ "$#" -ne 3 ]; then
     echo "Usage: $0 input_directory output_directory extensions" >&2
