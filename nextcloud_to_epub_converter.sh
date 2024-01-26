@@ -26,7 +26,7 @@ echo "Executing $command"
 output=$($command)
 FILE_COUNT=$(echo $output | awk -F"===>" '{print $2}')
 echo
-echo $output
+echo "$output"
 echo
 echo $FILE_COUNT
 echo
