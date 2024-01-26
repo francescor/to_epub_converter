@@ -24,7 +24,7 @@ OUTPUT_DIR=$NEXTCLOUD_DATA_DIR/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_OUTPUT_DIR
 command="$CONVERTER_SCRIPT $INPUT_DIR $OUTPUT_DIR  $EXTENSIONS_TO_CONVERT"
 echo "Executing $command"
 output=$($command)
-# $CONVERTER_SCRIPT $INPUT_DIR $OUTPUT_DIR  $EXTENSIONS_TO_CONVERT
+FILE_COUNT=echo $output | awk -F"===>" '{print $2}'
 echo
 echo $output
 echo

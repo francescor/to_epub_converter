@@ -52,5 +52,5 @@ for ext in $(echo $extensions | tr ',' ' '); do
   done
 done
 
-echo "Number of converted files: $counter"
-export FILE_COUNT=$counter
+# do not change the following since it is used by other scripts
+echo "Number of converted files ===>$counter"
