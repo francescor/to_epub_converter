@@ -42,7 +42,7 @@ for ext in $(echo $extensions | tr ',' ' '); do
       filename="${filename%.*}"
       if [ ! -f "$output_dir/$filename.epub" ]; then
         echo ">> Converting $file to $output_dir/$filename.epub"
-        $EBOOK_CONVERT_PATH "$file" "$output_dir/$filename.epub" --title "$file (converted to epub)"
+        $EBOOK_CONVERT_PATH "$file" "$output_dir/$filename.epub" --title "$filename.${ext} (converted)"
         chmod --reference="$file" "$output_dir/$filename.epub"  # Preserve the same permissions
         chown --reference="$file" "$output_dir/$filename.epub"  # Preserve the same owner
         ((counter+=1))
