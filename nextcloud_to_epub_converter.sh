@@ -22,14 +22,16 @@ INPUT_DIR=$NEXTCLOUD_DATA_DIR/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_INPUT_DIR
 OUTPUT_DIR=$NEXTCLOUD_DATA_DIR/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_OUTPUT_DIR
 
 command="$CONVERTER_SCRIPT $INPUT_DIR $OUTPUT_DIR  $EXTENSIONS_TO_CONVERT"
-echo "Executing $command"
+echo "Executing command:"
+echo "$command"
 output=$($command)
 FILE_COUNT=$(echo $output | awk -F"===>" '{print $2}')
 echo
 echo "$output"
-echo
-echo $FILE_COUNT
-echo
-# scan user directory, so that the user is able to see new files in his output directory
-/usr/bin/sudo -u $NEXTCLOUD_WEB_USER php $NEXTCLOUD_OCC files:scan --path=/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_OUTPUT_DIR $USER
+
+# scan only if files have been elaborated
+if [[ -v FILE_COUNT && $FILE_COUNT -gt 0 ]]; then
+  # scan user directory, so that the user is able to see new files in his output directory
+  /usr/bin/sudo -u $NEXTCLOUD_WEB_USER php $NEXTCLOUD_OCC files:scan --path=/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_OUTPUT_DIR $USER
+fi
 
