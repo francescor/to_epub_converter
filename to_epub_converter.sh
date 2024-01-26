@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 # https://github.com/francescor/to_epub_converter
+# Convert all files in a input directory to epub and save them in the output directory
+# (processed files from input directory are moved to a "done" directory
+
 set -e
 
 if [ "$#" -ne 3 ]; then
@@ -31,6 +34,12 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# directory where to move files that have been converted
+done_dir="$input_dir"/done
+mkdir -p "$done_dir"
+chmod --reference="$input_dir" "$done_dir"  # Preserve the same permissions
+chown --reference="$input_dir" "$done_dir"  # Preserve the same owner
+
 counter=0
 
 for ext in $(echo "$extensions" | tr ',' ' '); do
@@ -45,6 +54,7 @@ for ext in $(echo "$extensions" | tr ',' ' '); do
         chmod --reference="$file" "$output_dir/$filename.epub"  # Preserve the same permissions
         chown --reference="$file" "$output_dir/$filename.epub"  # Preserve the same owner
         ((counter+=1))
+        mv "$file" "$done_dir"
       else
         echo ">>   Already converted"
       fi

@@ -39,6 +39,8 @@ echo "$output"
 if [[ -v FILE_COUNT && $FILE_COUNT -gt 0 ]]; then
   # scan user directory, so that the user is able to see new files in his output directory
   $SUDO -u $NEXTCLOUD_WEB_USER php $NEXTCLOUD_OCC files:scan --path=/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_OUTPUT_DIR $USER
+  # we also scan input dir, since processed files are moved into the "done" directory
+  $SUDO -u $NEXTCLOUD_WEB_USER php $NEXTCLOUD_OCC files:scan --path=/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_INPUT_DIR $USER
 else
   echo "No new files, so Skipping scan for new files in Nextcloud"
 fi
