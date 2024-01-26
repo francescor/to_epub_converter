@@ -11,7 +11,8 @@ NEXTCLOUD_USER=francesco
 # here the directory as the user see them in his File/home
 NEXTCLOUD_USER_INPUT_DIR=AutoConvert/input
 NEXTCLOUD_USER_OUTPUT_DIR=AutoConvert/output
-EXTENSIONS_TO_CONVERT=pdf,txt,doc
+# see https://manual.calibre-ebook.com/faq.html for allowed input formats
+EXTENSIONS_TO_CONVERT=pdf,txt,doc,docx,html,odt,rtf
 
 # Nextcloud
 NEXTCLOUD_DATA_DIR=/var/www/nextcloud/data

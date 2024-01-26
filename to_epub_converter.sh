@@ -10,6 +10,7 @@ if [ "$#" -ne 3 ]; then
     echo "Usage: $0 input_directory output_directory extensions" >&2
     echo "e.g."
     echo "$0 /tmp/input /tmp/output pdf,doc,txt"
+    echo "See https://manual.calibre-ebook.com/faq.html for all format allowed"
     echo
     exit 1
 fi
