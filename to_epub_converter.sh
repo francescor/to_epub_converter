@@ -33,12 +33,11 @@ fi
 
 counter=0
 
-for ext in $(echo $extensions | tr ',' ' '); do
-  for file in ${input_dir}/*.${ext}; do
+for ext in $(echo "$extensions" | tr ',' ' '); do
+  for file in "${input_dir}"/*."${ext}"; do
     echo ">> Checking $file"
     if [ -e "$file" ]; then
       filename=$(basename -- "$file")
-      extension="${filename##*.}"
       filename="${filename%.*}"
       if [ ! -f "$output_dir/$filename.epub" ]; then
         echo ">> Converting $file to $output_dir/$filename.epub"
