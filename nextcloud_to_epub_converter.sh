@@ -21,8 +21,15 @@ CONVERTER_SCRIPT=$THIS_DIR/to_epub_converter.sh
 INPUT_DIR=$NEXTCLOUD_DATA_DIR/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_INPUT_DIR
 OUTPUT_DIR=$NEXTCLOUD_DATA_DIR/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_OUTPUT_DIR
 
-$CONVERTER_SCRIPT $INPUT_DIR $OUTPUT_DIR  $EXTENSIONS_TO_CONVERT
-
+command="$CONVERTER_SCRIPT $INPUT_DIR $OUTPUT_DIR  $EXTENSIONS_TO_CONVERT"
+echo "Executing $command"
+output=$($command)
+# $CONVERTER_SCRIPT $INPUT_DIR $OUTPUT_DIR  $EXTENSIONS_TO_CONVERT
+echo
+echo $output
+echo
+echo $FILE_COUNT
+echo
 # scan user directory, so that the user is able to see new files in his output directory
 /usr/bin/sudo -u $NEXTCLOUD_WEB_USER php $NEXTCLOUD_OCC files:scan --path=/$NEXTCLOUD_USER/files/$NEXTCLOUD_USER_OUTPUT_DIR $USER
 

@@ -53,3 +53,4 @@ for ext in $(echo $extensions | tr ',' ' '); do
 done
 
 echo "Number of converted files: $counter"
+export FILE_COUNT=$counter
