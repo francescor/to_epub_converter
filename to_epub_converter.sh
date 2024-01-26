@@ -30,6 +30,8 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+counter=0
+
 for ext in $(echo $extensions | tr ',' ' '); do
   for file in ${input_dir}/*.${ext}; do
     echo ">> Checking $file"
@@ -42,6 +44,7 @@ for ext in $(echo $extensions | tr ',' ' '); do
         $EBOOK_CONVERT_PATH "$file" "$output_dir/$filename.epub"
         chmod --reference="$file" "$output_dir/$filename.epub"  # Preserve the same permissions
         chown --reference="$file" "$output_dir/$filename.epub"  # Preserve the same owner
+        ((counter+=1))
       else
         echo ">>   Already converted"
       fi
@@ -49,3 +52,4 @@ for ext in $(echo $extensions | tr ',' ' '); do
   done
 done
 
+echo "Number of converted files: $counter"
